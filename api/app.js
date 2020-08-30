@@ -3,7 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const firebase = require("firebase");
-//const graphqlHTTP = require("express-graphql");
+const { graphqlHTTP } = require('express-graphql');
 const cors = require('cors');
 
 
@@ -32,5 +32,14 @@ app.use('*', cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+
+var userSchema = require('./graphql').userSchema;
+app.use('/graphql', cors(), graphqlHTTP({
+    schema: userSchema,
+    rootValue: global,
+    graphiql: true
+}));
+
 
 module.exports = app;
