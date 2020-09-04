@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 
-export default class PhoneList extends Component {   
+class PhoneList extends Component {   
     render() {           
         return(
             <table className="table table-striped my-3">
@@ -22,3 +23,6 @@ export default class PhoneList extends Component {
     }
 
 }
+
+export default connect(
+)(PhoneList)
