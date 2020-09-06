@@ -8,22 +8,25 @@ const client = new ApolloClient ({
 })
 
 
-//==================start load contact data
+//========================= start load contact data
 
-const loadContactSuccess = (users) = ({
+const loadContactSuccess = (users) => ({
     type: 'LOAD_CONTACT_SUCCESS',
     users
 })
+
 
 const loadContactFailure = () => ({
     type: 'LOAD_CONTACT_FAILURE'
 })
 
+
+
 export const loadContact = () => {
     const contactQuery = gql`
     query {
         users{
-            id
+            Id
             Name
             Phone
     }
@@ -43,4 +46,8 @@ export const loadContact = () => {
     }
 }
 
-// end load contact data
+//============================== end load contact data
+
+
+
+

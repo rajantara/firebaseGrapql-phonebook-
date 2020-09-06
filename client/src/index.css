@@ -23,10 +23,10 @@ code {
 }
 
 .card-header{
-  background-color: grey;
+  background-image: linear-gradient(to right, #2C3E50 0%, #FD746C 51%, #2C3E50 100%)
 }
 .card-footer{
-  background-color: grey;
+  background-image: linear-gradient(to right, #808080 0%, #3fada8 51%, #808080 100%)
 }
 
 .btn {
@@ -63,3 +63,4 @@ code {
   width: auto;
   height: auto;
 }
+
