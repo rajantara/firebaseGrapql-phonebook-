@@ -6,7 +6,7 @@ const phones = (state = [], action) => {
                 return item
             })
         case 'POST_CONTACT':
-            return[
+            return [
                 ...state,
                 {
                     Id: action.Id,
@@ -15,9 +15,17 @@ const phones = (state = [], action) => {
                     sent: true
                 }
             ]
+
+        case 'DELETE_CONTACT':
+            return state.filter((item) => item.Id !== action.Id)
+
+        case 'DELETE_CONTACT_SUCCESS':
+            return state
+
         case 'LOAD_CONTACT_FAILURE':
-            default:
-                return state        
+        case 'DELETE_CONTACT_FAILURE':
+        default:
+            return state
     }
 }
 

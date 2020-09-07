@@ -3,8 +3,8 @@ import gql from 'graphql-tag';
 
 const API_URL = 'http://localhost:3000/graphql/'
 
-const client = new ApolloClient ({
-    uri:API_URL
+const client = new ApolloClient({
+    uri: API_URL
 })
 
 
@@ -47,6 +47,71 @@ export const loadContact = () => {
 }
 
 //============================== end load contact data
+
+
+
+
+
+
+
+
+
+
+
+
+//============================== start delete contact data
+
+
+const deleteContactRedux = (Id) => ({
+    type: 'DELETE_CONTACT', Id
+})
+
+
+
+export const deleteContactSuccess = (Contact) => ({
+    type: 'DELETE_CONTACT_SUCCESS',
+    Contact
+})
+
+
+export const deleteContactFailure = () => ({
+    type: 'DELETE_CONTACT_FAILURE'
+})
+
+
+export const deleteContact = (Id) => {
+    const deleteQuery = gql`
+    mutation removeContact($Id: String!) {
+    removeContact(Id: $Id) {
+        Id
+    }
+}`;
+    return dispatch => {
+        dispatch(deleteContactRedux(Id))
+        return client.mutate({
+            mutation: deleteQuery,
+            variables: {
+                Id
+            }
+        }).then(function (response) {
+            dispatch(deleteContactSuccess(response))
+        })
+
+            .catch(function (error) {
+                console.error(error);
+                dispatch(deleteContactFailure())
+            });
+    }
+
+}
+
+
+//============================== end delete contact data
+
+
+
+
+
 
 
 
