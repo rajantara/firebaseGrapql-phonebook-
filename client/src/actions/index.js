@@ -1,5 +1,7 @@
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
+import Swal from "sweetalert2";
+
 
 const API_URL = 'http://localhost:3000/graphql/'
 
@@ -54,6 +56,61 @@ export const loadContact = () => {
 
 
 
+//============================== start post contact data
+
+export const postContactSuccess = (Contact) => ({
+    type: 'POST_CONTACT_SUCCESS',
+    Contact
+})
+
+export const postContactFailure = (Id) => ({
+    type: 'POST_CONTACT_FAILURE',
+    Id
+})
+
+const postContactRedux = (Id, Name, Phone) => ({
+    type: 'POST_CONTACT',
+    Id,
+    Name,
+    Phone
+})
+
+export const postContact = (Id, Name, Phone) => {
+    const addQuery = gql`
+    mutation addContact($Id: String!, $Name: String!, $Phone: String!) {
+        addContact(Id: $Id, Name: $Name, Phone: $Phone) {
+            Id
+            Name
+            Phone
+        }
+    }`;
+    return dispatch => {
+        dispatch(postContactRedux(Id, Name, Phone))
+        return client.mutate({
+            mutation: addQuery,
+            variables: {
+                Id,
+                Name,
+                Phone
+            }
+        })
+
+            .then(function (response) {
+                console.log(response.data, 'this data dude')
+                dispatch(postContactSuccess(response.data))
+
+            })
+            .catch(function (error) {
+                console.log(error);
+                dispatch(postContactFailure(Id))
+            });
+    }
+}
+
+//============================== end post contact data
+
+
+
 
 
 
@@ -94,9 +151,15 @@ export const deleteContact = (Id) => {
                 Id
             }
         }).then(function (response) {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your work has been Deleted',
+                showConfirmButton: false,
+                timer: 1000
+            })
             dispatch(deleteContactSuccess(response))
         })
-
             .catch(function (error) {
                 console.error(error);
                 dispatch(deleteContactFailure())

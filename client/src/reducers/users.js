@@ -16,6 +16,20 @@ const phones = (state = [], action) => {
                 }
             ]
 
+        case 'POST_CONTACT_SUCCESS':
+            return state.map((item) => {
+                item.sent = true
+                return item
+            })
+        
+        case 'POST_CONTACT_FAILURE':
+            return state.map((item) => {
+                if (item.Id === action.Id) {
+                    item.sent = false;
+                }
+                return item
+            })    
+
         case 'DELETE_CONTACT':
             return state.filter((item) => item.Id !== action.Id)
 
