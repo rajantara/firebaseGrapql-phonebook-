@@ -3,7 +3,7 @@ import React from 'react';
 const contact = (props) => {
     return (
         <tr>
-            <th scope="row">{props.Id}</th>
+            <th scope="row">{props.index}</th>
             <th scope="row">{props.Name}</th>
             <th scope="row">{props.Phone}</th>
             <td>

@@ -12,11 +12,12 @@ class PhoneList extends Component {
 
     render() {
         console.log(this.props, 'ini list men')
-        const contact = this.props.data.map((item) => {
+        const contact = this.props.data.map((item, index) => {
             return (
 
-                <Phone 
-                    Id={item.Id}
+                <Phone
+                    key={index}
+                    index={index + 1}
                     Name={item.Name}
                     Phone={item.Phone}
                     sent={item.sent} />
@@ -28,7 +29,7 @@ class PhoneList extends Component {
             <table className="table table-striped my-3">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">No</th>
                         <th scope="col">Users Name</th>
                         <th scope="col">Phone Number</th>
                         <th scope="col">Action</th>
