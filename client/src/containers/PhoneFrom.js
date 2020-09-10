@@ -13,7 +13,7 @@ class PhoneForm extends Component {
         }
         this.handleIDchange = this.handleIDchange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
-        //this.handleNumberChange = this.handleNumberChange.bind(this);
+        this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         //this.handleFilterChange = this.handleFilterChange.bind(this)
         this.handleReset = this.handleReset.bind(this)
@@ -28,15 +28,15 @@ class PhoneForm extends Component {
         this.setState({ Id: event.target.value });
     }
 
-   
     handleNameChange(event) {
         this.setState({ Name: event.target.value });
     }
 
-    handlePhoneChange(event) {
-        this.setState({ Phone: event.target.value });
+    handlePhoneChange(event){
+        this.setState({Phone: event.target.value})
     }
 
+    
     handleSubmit(event) {
         if (this.state.Id && this.state.Name && this.state.Phone) {
             this.props.postContact(this.state.Id, this.state.Name, this.state.Phone)
