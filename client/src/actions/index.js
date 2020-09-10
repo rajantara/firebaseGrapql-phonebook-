@@ -58,9 +58,9 @@ export const loadContact = () => {
 
 //============================== start post contact data
 
-export const postContactSuccess = (Contact) => ({
+export const postContactSuccess = (users) => ({
     type: 'POST_CONTACT_SUCCESS',
-    Contact
+    users
 })
 
 export const postContactFailure = (Id) => ({
@@ -106,7 +106,6 @@ export const postContact = (Id, Name, Phone) => {
             });
     }
 }
-
 //============================== end post contact data
 
 
@@ -118,16 +117,14 @@ export const postContact = (Id, Name, Phone) => {
 
 //============================== start delete contact data
 
-
 const deleteContactRedux = (Id) => ({
     type: 'DELETE_CONTACT', Id
 })
 
 
-
-export const deleteContactSuccess = (Contact) => ({
+export const deleteContactSuccess = (users) => ({
     type: 'DELETE_CONTACT_SUCCESS',
-    Contact
+    users
 })
 
 
@@ -137,6 +134,7 @@ export const deleteContactFailure = () => ({
 
 
 export const deleteContact = (Id) => {
+
     const deleteQuery = gql`
     mutation removeContact($Id: String!) {
     removeContact(Id: $Id) {
@@ -144,30 +142,40 @@ export const deleteContact = (Id) => {
     }
 }`;
     return dispatch => {
-        dispatch(deleteContactRedux(Id))
-        return client.mutate({
-            mutation: deleteQuery,
-            variables: {
-                Id
+        Swal.fire({
+            icon: 'warning',
+            title: "Are you sure delete this contact?",
+            text: "You can't revert this action",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes Delete it!",
+            cancelButtonText: "No, Keep it!",
+            showCloseButton: true,
+            showLoaderOnConfirm: true
+        }).then(result => {
+
+            if (result.value) {
+                dispatch(deleteContactRedux(Id))
+                return client.mutate({
+                    mutation: deleteQuery,
+                    variables: {
+                        Id
+                    }
+                })
+                    .then(function (response) {
+
+                        dispatch(deleteContactSuccess(response))
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                        dispatch(deleteContactFailure())
+                    });
             }
-        }).then(function (response) {
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Your work has been Deleted',
-                showConfirmButton: false,
-                timer: 1000
-            })
-            dispatch(deleteContactSuccess(response))
         })
-            .catch(function (error) {
-                console.error(error);
-                dispatch(deleteContactFailure())
-            });
+
     }
 
 }
-
 
 //============================== end delete contact data
 

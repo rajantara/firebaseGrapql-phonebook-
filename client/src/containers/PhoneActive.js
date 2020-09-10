@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { deleteContact } from '../actions'
+import { deleteContact} from '../actions'
 import Phone from '../components/Phone'
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

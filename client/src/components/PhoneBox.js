@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PhoneList from '../containers/PhoneList';
+import PhoneForm from '../containers/PhoneFrom';
 
 
 export default class PhoneBox extends Component {
@@ -11,7 +12,8 @@ export default class PhoneBox extends Component {
                         <h1> <i className="fa fa-address-book"></i> 𝓟𝓱𝓸𝓷𝓮𝓼 𝓑𝓸𝓸𝓴 𝓐𝓹𝓹𝓼</h1>
                     </div>
                     <div className="card-body">
-                    <PhoneList />   
+                        <PhoneForm />
+                        <PhoneList />
                     </div>
                     <div className="card-footer text-center">
                         <i className="far fa-copyright"></i> 𝕮𝖗𝖊𝖆𝖙𝖊𝖉 𝖇𝖞 𝕷𝖆 𝖔𝖉𝖊 𝖗𝖆𝖏𝖆𝖓𝖙𝖆𝖗𝖆

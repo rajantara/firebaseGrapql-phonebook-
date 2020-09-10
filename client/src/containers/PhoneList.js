@@ -17,7 +17,7 @@ class PhoneList extends Component {
 
                 <Phone
                     key={index}
-                    index={index + 1}
+                    Id={item.Id} index={index + 1}
                     Name={item.Name}
                     Phone={item.Phone}
                     sent={item.sent} />
@@ -30,6 +30,7 @@ class PhoneList extends Component {
                 <thead>
                     <tr>
                         <th scope="col">No</th>
+                        <th scope="col">User ID</th>
                         <th scope="col">Users Name</th>
                         <th scope="col">Phone Number</th>
                         <th scope="col">Action</th>
