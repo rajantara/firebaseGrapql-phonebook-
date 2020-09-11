@@ -134,13 +134,12 @@ export const deleteContactFailure = () => ({
 
 
 export const deleteContact = (Id) => {
-
     const deleteQuery = gql`
-    mutation removeContact($Id: String!) {
-    removeContact(Id: $Id) {
+    mutation removeUser($Id: ID!) {
+      removeUser(Id: $Id) {
         Id
-    }
-}`;
+      }
+    }`;
     return dispatch => {
         Swal.fire({
             icon: 'warning',
