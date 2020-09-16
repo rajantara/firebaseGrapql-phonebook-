@@ -56,36 +56,37 @@ export const loadContact = () => {
 
 
 
+
+
+
+
 //============================== start post contact data
 
-export const postContactSuccess = (users) => ({
-    type: 'POST_CONTACT_SUCCESS',
+export const postUserSuccess = (users) => ({
+    type: 'POST_USER_SUCCESS',
     users
 })
 
-export const postContactFailure = (Id) => ({
-    type: 'POST_CONTACT_FAILURE',
-    Id
+export const postUserFailure = (Id) => ({
+    type: 'POST_USER_FAILURE', Id
 })
 
-const postContactRedux = (Id, Name, Phone) => ({
-    type: 'POST_CONTACT',
-    Id,
-    Name,
-    Phone
+const postUserRedux = (Id, Name, Phone) => ({
+    type: 'POST_USER', Id, Name, Phone
 })
 
-export const postContact = (Id, Name, Phone) => {
+
+export const postUser = (Id, Name, Phone) => {
     const addQuery = gql`
-    mutation addContact($Id: String!, $Name: String!, $Phone: String!) {
-        addContact(Id: $Id, Name: $Name, Phone: $Phone) {
-            Id
-            Name
-            Phone
-        }
+    mutation addUser($Id: ID!, $Name: String!, $Phone: String!) {
+      addUser(Id: $Id, Name: $Name, Phone: $Phone) {
+        Id
+        Name
+        Phone
+      }
     }`;
     return dispatch => {
-        dispatch(postContactRedux(Id, Name, Phone))
+        dispatch(postUserRedux(Id, Name, Phone))
         return client.mutate({
             mutation: addQuery,
             variables: {
@@ -94,19 +95,27 @@ export const postContact = (Id, Name, Phone) => {
                 Phone
             }
         })
-
             .then(function (response) {
-                console.log(response.data, 'this data dude')
-                dispatch(postContactSuccess(response.data))
-
+                dispatch(postUserSuccess(response.data))
             })
             .catch(function (error) {
-                console.log(error);
-                dispatch(postContactFailure(Id))
+                console.error(error);
+                dispatch(postUserFailure(Id))
             });
     }
 }
+
+
+
 //============================== end post contact data
+
+
+
+
+
+
+
+
 
 
 
@@ -177,6 +186,46 @@ export const deleteContact = (Id) => {
 }
 
 //============================== end delete contact data
+
+
+
+
+
+
+//============================== start resendcontact
+
+// end delete user data
+
+export const resendUser = (Id, Name, Phone) => {
+    const addQuery = gql`
+    mutation updateUser($Id: ID!, $Name: String!, $Phone: String!) {
+      addUser(Id: $Id, Name: $Name, Phone: $Phone) {
+        Id
+        Name
+        Phone
+      }
+    }`;
+    return dispatch => {
+        return client.mutate({
+            mutation: addQuery,
+            variables: {
+                Id,
+                Name,
+                Phone
+            }
+        })
+            .then(function (response) {
+                dispatch(postUserSuccess(response))
+            })
+            .catch(function (error) {
+                console.error(error);
+                dispatch(postUserFailure(Id))
+            });
+    }
+}
+
+
+//============================== end start resendcontact
 
 
 

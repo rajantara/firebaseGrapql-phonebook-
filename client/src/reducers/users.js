@@ -7,26 +7,26 @@ const phones = (state = [], action) => {
                 item.onEdit = false;
                 return item
             })
-        case 'POST_CONTACT':
+
+            
+        case 'POST_USER':
             return [
                 ...state,
                 {
                     Id: action.Id,
                     Name: action.Name,
                     Phone: action.Phone,
-                    sent: true,
-                    search: true,
-                    onEdit: false
+                    sent: true
                 }
             ]
 
-        case 'POST_CONTACT_SUCCESS':
+        case 'POST_USER_SUCCESS':
             return state.map((item) => {
-                item.sent = true
+                item.sent = true;
                 return item
             })
 
-        case 'POST_CONTACT_FAILURE':
+        case 'POST_USER_FAILURE':
             return state.map((item) => {
                 if (item.Id === action.Id) {
                     item.sent = false;
@@ -34,9 +34,11 @@ const phones = (state = [], action) => {
                 return item
             })
 
+
+
         case 'DELETE_CONTACT':
             return state.filter((item) => item.Id !== action.Id)
-            
+
 
         case 'DELETE_CONTACT_SUCCESS':
             return state

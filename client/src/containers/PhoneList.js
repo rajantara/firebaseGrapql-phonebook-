@@ -17,7 +17,7 @@ class PhoneList extends Component {
 
                 <Phone
                     key={index}
-                    Id={item.Id} index={index + 1}
+                    Id={item.Id}
                     Name={item.Name}
                     Phone={item.Phone}
                     sent={item.sent} />
@@ -29,7 +29,6 @@ class PhoneList extends Component {
             <table className="table table-striped my-3">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
                         <th scope="col">User ID</th>
                         <th scope="col">Users Name</th>
                         <th scope="col">Phone Number</th>

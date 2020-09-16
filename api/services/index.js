@@ -28,7 +28,7 @@ const createUser = (user) => {
   const referencePath = `/Users/${user.Id}/`;
   const userReference = firebase.database().ref(referencePath);
   return (new Promise((resolve, reject) => {
-    userReference.update({Name : user.Name, Phone: user.Phone}, (error) => {
+    userReference.set({Name : user.Name, Phone: user.Phone}, (error) => {
       if (error) {
         reject("data could not be added." + error);
       } else {
