@@ -53,13 +53,6 @@ export const loadContact = () => {
 
 
 
-
-
-
-
-
-
-
 //============================== start post contact data
 
 export const postUserSuccess = (users) => ({
@@ -105,8 +98,6 @@ export const postUser = (Id, Name, Phone) => {
     }
 }
 
-
-
 //============================== end post contact data
 
 
@@ -114,9 +105,67 @@ export const postUser = (Id, Name, Phone) => {
 
 
 
+//============================== start update contact data
 
+export const updateUserSuccess = (users) => ({
+    type: 'UPDATE_USER_SUCCESS',
+    users
+})
 
+export const updateUserFailure = (Id) => ({
+    type: 'UPDATE_DATA_FAILURE',
+    Id
+})
 
+const updateUserRedux = (Id, Name, Phone) => ({
+    type: 'UPDATE_USER',
+    Id,
+    Name,
+    Phone
+})
+
+export const updateON = (Id) => ({
+    type: 'UPDATE_ON',
+    Id
+})
+
+export const updateOFF = (Id) => ({
+    type: 'UPDATE_OFF',
+    Id
+})
+
+export const updateUser = (Id, Name, Phone) => {
+    const addQuery = gql`
+    mutation UpdateUser($Id: ID!, $Name: String!, $Phone: String!) {
+        UpdateUser(Id: $Id, Name: $Name, Phone: $Phone) {
+          Id
+          Name
+          Phone
+        }
+    }`;
+    return dispatch => {
+        dispatch(updateUserRedux(Id, Name, Phone))
+        return client.mutate({
+            mutation: addQuery,
+            variables: {
+                Id,
+                Name,
+                Phone
+            }
+        })
+
+            .then(function (response) {
+                console.log(response, 'data succes update')
+                dispatch(updateUserSuccess(response.data))
+            })
+            .catch(function (error) {
+                console.error(error);
+                dispatch(updateUserFailure(Id))
+            })
+    }
+}
+
+//============================== end update contact data
 
 
 

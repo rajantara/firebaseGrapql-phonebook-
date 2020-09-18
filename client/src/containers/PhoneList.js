@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Phone from './PhoneActive';
 import { connect } from 'react-redux';
 import { loadContact } from '../actions';
+import PhoneEditFrom from './PhoneEditFrom';
 
 
 class PhoneList extends Component {
@@ -14,14 +15,21 @@ class PhoneList extends Component {
         console.log(this.props, 'ini list men')
         const contact = this.props.data.map((item, index) => {
             return (
-
-                <Phone
-                    key={index}
-                    Id={item.Id}
-                    Name={item.Name}
-                    Phone={item.Phone}
-                    sent={item.sent} />
-
+                (item.onEdit ?
+                    <PhoneEditFrom
+                        key={index}
+                        Id={item.Id}
+                        Name={item.Name}
+                        Phone={item.Phone}
+                        sent={item.sent} />
+                    :
+                    <Phone
+                        key={index}
+                        Id={item.Id}
+                        Name={item.Name}
+                        Phone={item.Phone}
+                        sent={item.sent} />
+                )
             )
         })
 

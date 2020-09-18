@@ -8,7 +8,7 @@ const phones = (state = [], action) => {
                 return item
             })
 
-            
+
         case 'POST_USER':
             return [
                 ...state,
@@ -33,6 +33,64 @@ const phones = (state = [], action) => {
                 }
                 return item
             })
+
+
+
+
+
+
+
+        case 'UPDATE_ON':
+            return state.map(item => ({
+                ...item,
+                ...(item.Id === action.Id && { onEdit: true })
+            }))
+
+
+        case 'UPDATE_OFF':
+            return state.map(item => ({
+                ...item,
+                ...(item.Id === action.Id && { onEdit: false })
+            }))
+
+
+        case 'UPDATE_USER':
+            return state.map(item => ({
+                ...item,
+                ...(item.Id === action.Id && {
+                    onEdit: false,
+                    Name: action.Name,
+                    Phone: action.Number,
+                    sent: true
+                })
+            }))
+
+
+        case 'UPDATE_USER_SUCCESS':
+            return state.map(item => ({
+                ...item,
+                ...(item.Id === action.Id && {
+                    onEdit: false,
+                    Name: action.Name,
+                    Phone: action.Phone,
+                    sent: true
+                })
+            }))
+
+        case 'UPDATE_DATA_FAILURE':
+            return state.map(item => ({
+                ...item,
+                ...(item.Id === action.Id && {
+                    onEdit: false,
+                    sent: false
+                })
+            }))
+
+
+
+
+
+
 
 
 
