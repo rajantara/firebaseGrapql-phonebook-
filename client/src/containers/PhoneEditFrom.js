@@ -13,15 +13,10 @@ class PhoneEditFrom extends React.Component {
             Phone: props.Phone
         }
         
-        this.handleIdChange = this.handleIdChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this)
         this.handlePhoneChange = this.handlePhoneChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
 
-    }
-
-    handleIdChange(event){
-        this.setState({Id: event.target.value})
     }
 
     handleNameChange(event) {
@@ -40,7 +35,7 @@ class PhoneEditFrom extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        this.props.updateUser(this.state.Name, this.state.Id, this.state.Phone)
+        this.props.updateUser(this.state.Id, this.state.Name, this.state.Phone)
     }
 
     render() {
@@ -80,15 +75,13 @@ class PhoneEditFrom extends React.Component {
 
 }
 
-
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onCancel: () => dispatch(updateOFF(ownProps.Id)),
-    updateUser: (Name, Id, Phone) => {
-        dispatch(updateUser(Name, Id, Phone))
+    updateUser: (Id, Name, Phone) => {
+        dispatch(updateUser(Id, Name, Phone))
         dispatch(updateOFF(ownProps.Id))
     }
 })
-
 
 export default connect(
     null,

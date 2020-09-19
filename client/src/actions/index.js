@@ -136,8 +136,8 @@ export const updateOFF = (Id) => ({
 
 export const updateUser = (Id, Name, Phone) => {
     const addQuery = gql`
-    mutation UpdateUser($Id: ID!, $Name: String!, $Phone: String!) {
-        UpdateUser(Id: $Id, Name: $Name, Phone: $Phone) {
+    mutation updateUser($Id: ID!, $Name: String!, $Phone: String!) {
+        updateUser(Id: $Id, Name: $Name, Phone: $Phone) {
           Id
           Name
           Phone
@@ -235,8 +235,6 @@ export const deleteContact = (Id) => {
 }
 
 //============================== end delete contact data
-
-
 
 
 

@@ -35,11 +35,6 @@ const phones = (state = [], action) => {
             })
 
 
-
-
-
-
-
         case 'UPDATE_ON':
             return state.map(item => ({
                 ...item,
@@ -60,7 +55,7 @@ const phones = (state = [], action) => {
                 ...(item.Id === action.Id && {
                     onEdit: false,
                     Name: action.Name,
-                    Phone: action.Number,
+                    Phone: action.Phone,
                     sent: true
                 })
             }))
@@ -85,13 +80,6 @@ const phones = (state = [], action) => {
                     sent: false
                 })
             }))
-
-
-
-
-
-
-
 
 
         case 'DELETE_CONTACT':
