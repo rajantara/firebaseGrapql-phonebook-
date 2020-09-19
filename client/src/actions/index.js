@@ -144,6 +144,13 @@ export const updateUser = (Id, Name, Phone) => {
         }
     }`;
     return dispatch => {
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Contact updated successfully!',
+            showConfirmButton: false,
+            timer: 1200
+        })
         dispatch(updateUserRedux(Id, Name, Phone))
         return client.mutate({
             mutation: addQuery,
@@ -159,6 +166,12 @@ export const updateUser = (Id, Name, Phone) => {
                 dispatch(updateUserSuccess(response.data))
             })
             .catch(function (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'There is a problem',
+                    text: 'Something went wrong! check your connection',
+                    showConfirmButton: true
+                })
                 console.error(error);
                 dispatch(updateUserFailure(Id))
             })
@@ -274,6 +287,22 @@ export const resendUser = (Id, Name, Phone) => {
 
 //============================== end start resendcontact
 
+
+
+//============================== start search contact
+
+
+export const searchContact = (value) => ({
+    type: "SEARCH_CONTACT",
+    value: value.trim()
+})
+
+export const searchContactReset = () => ({
+    type: "SEARCH_CONTACT_RESET"
+})
+
+
+//============================== end search contact
 
 
 

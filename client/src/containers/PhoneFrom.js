@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { postUser } from '../actions'
+import { postUser, searchContact, searchContactReset } from '../actions'
 
 class PhoneForm extends Component {
     constructor (props){
@@ -9,13 +9,17 @@ class PhoneForm extends Component {
         this.state = {
             Id: "",
             Name: "",
-            Phone: ""
+            Phone: "",
+            value: '',
+            search: false
         }
 
         this.handleIdChange = this.handleIdChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFilterChange = this.handleFilterChange.bind(this)
+        this.handleReset = this.handleReset.bind(this)
         this.handleButtonSearch = this.handleButtonSearch.bind(this)
         this.handleButtonCancel = this.handleButtonCancel.bind(this)
     }
@@ -27,17 +31,19 @@ class PhoneForm extends Component {
     handleNameChange(event){
         this.setState({Name: event.target.value})
     }
+
     handlePhoneChange(event){
         this.setState({Phone: event.target.value})
     }
+
     handleSubmit(event){
         if(this.state.Id && this.state.Name && this.state.Phone){
             this.props.postUser(this.state.Id, this.state.Name, this.state.Phone)
             this.setState({Id: "", Name:"", Phone:""});
         }
+        event.preventDefault();
     }
 
-    //tambahan
     handleButtonSearch() {
         this.setState({
             search: true
@@ -48,7 +54,23 @@ class PhoneForm extends Component {
         this.setState({
             search: false
         })
-        //this.props.searchContactReset()
+        this.props.searchContactReset()
+    }
+
+    handleFilterChange(event) {
+        let value = event.target.value
+        this.setState({
+            value: event.target.value
+        })
+        this.props.searchContact(value)
+    }
+
+    handleReset(event) {
+        event.preventDefault();
+        this.setState({
+            value: ''
+        })
+        this.props.searchContactReset()
     }
 
     render(){
@@ -67,13 +89,13 @@ class PhoneForm extends Component {
                     </p>
 
                     <div className="collapse" id="addForm">
-                        <div className="card card-header">
-                            <h5 className="card-text">Add Contact</h5>
+                        <div className="add button">
+                            <h5>🅰🅳🅳 🅲🅾🅽🆃🅰🅲🆃</h5>
                         </div>
                         <div className="card card-body">
                             <div className="row">
                                 <div className="col-3">
-                                    <input type="text" name="id" value={this.state.Id} onChange={this.handleIdChange}  className="form-control" placeholder="Username Here" required />
+                                    <input type="text" name="id" value={this.state.Id} onChange={this.handleIdChange}  className="form-control" placeholder="Id Here" required />
                                 </div>
                                 <div className="col-3">
                                     <input type="text" name="Name" value={this.state.Name} onChange={this.handleNameChange} className="form-control" placeholder="Full Name Here" required />
@@ -88,7 +110,7 @@ class PhoneForm extends Component {
                     </div>
 
                     <div className="collapse mt-3" id="searchForm">
-                        <h5 className="card-header">Search Contact</h5>
+                        <h5 className="add button">🆂🅴🅰🆁🅲🅷 🅲🅾🅽🆃🅰🅲🆃</h5>
                         <div className="card card-body">
                             <div className="form-row">
                                 <div className="form-group col-md-4">
@@ -119,6 +141,8 @@ class PhoneForm extends Component {
 
 
 const mapDispatchToProps = dispatch => ({
+    searchContact: (value) => { dispatch(searchContact(value)) },
+    searchContactReset: () => { dispatch(searchContactReset()) },
     postUser: (Id, Name, Phone) => dispatch(postUser(Id, Name, Phone))
 })
 

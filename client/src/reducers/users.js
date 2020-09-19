@@ -81,6 +81,17 @@ const phones = (state = [], action) => {
                 })
             }))
 
+        case "SEARCH_CONTACT":
+            return state.map((item) => ({
+                ...item,
+                search: (item.Id.toLowerCase().includes(action.value) || item.Name.toLowerCase().includes(action.value) || item.Phone.includes(action.value))
+            }))
+
+        case "SEARCH_CONTACT_RESET":
+            return state.map((item) => ({
+                ...item,
+                search: true
+            }))
 
         case 'DELETE_CONTACT':
             return state.filter((item) => item.Id !== action.Id)

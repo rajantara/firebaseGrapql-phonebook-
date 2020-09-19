@@ -12,10 +12,10 @@ class PhoneList extends Component {
     }
 
     render() {
-        console.log(this.props, 'ini list men')
+        console.log(this.props, 'this list men')
         const contact = this.props.data.map((item, index) => {
             return (
-                (item.onEdit ?
+                item.search && (item.onEdit ?
                     <PhoneEditFrom
                         key={index}
                         Id={item.Id}
