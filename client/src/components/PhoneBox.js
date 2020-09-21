@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PhoneList from '../containers/PhoneList';
 import PhoneForm from '../containers/PhoneFrom';
+import HeaderCard from './HeaderCard';
 
 
 export default class PhoneBox extends Component {
@@ -8,9 +9,7 @@ export default class PhoneBox extends Component {
         return (
             <div className="container-fluid my-5">
                 <div className="container card">
-                    <div className="card-header text-center">
-                        <h1> <i className="fa fa-address-book"></i> 𝓟𝓱𝓸𝓷𝓮𝓼 𝓑𝓸𝓸𝓴 𝓐𝓹𝓹𝓼</h1>
-                    </div>
+                    <HeaderCard />
                     <div className="card-body">
                         <PhoneForm />
                         <PhoneList />
