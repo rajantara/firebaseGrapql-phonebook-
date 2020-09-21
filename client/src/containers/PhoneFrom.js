@@ -95,13 +95,13 @@ class PhoneForm extends Component {
                         <div className="card card-body">
                             <div className="row">
                                 <div className="col-3">
-                                    <input type="text" name="id" value={this.state.Id} onChange={this.handleIdChange}  className="form-control" placeholder="Id Here" required />
+                                    <input type="text" name="Id" value={this.state.Id} onChange={this.handleIdChange}  className="form-control" placeholder="Id Here" required />
                                 </div>
                                 <div className="col-3">
                                     <input type="text" name="Name" value={this.state.Name} onChange={this.handleNameChange} className="form-control" placeholder="Full Name Here" required />
                                 </div>
                                 <div className="col-3">
-                                    <input type="number" name="Number" value={this.state.Phone} onChange={this.handlePhoneChange} className="form-control" placeholder="Your Phone Number Here" required />
+                                    <input type="number" name="Phone" value={this.state.Phone} onChange={this.handlePhoneChange} className="form-control" placeholder="Your Phone Number Here" required />
                                 </div>
                                 <button type="submit" className="btn mr-2"> <i className="fas fa-save"></i> Save</button>
                                 <button type="button" onClick={this.handleButtonCancel} className="btn" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm"><i className="fas fa-times"></i> Cancel</button>

@@ -89,10 +89,23 @@ export const postUser = (Id, Name, Phone) => {
             }
         })
             .then(function (response) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Contact added successfully!',
+                    showConfirmButton: false,
+                    timer: 1200
+                })
                 dispatch(postUserSuccess(response.data))
             })
             .catch(function (error) {
-                console.error(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong! check your connection',
+                    showConfirmButton: true
+                })
+                console.log(error)
                 dispatch(postUserFailure(Id))
             });
     }
@@ -303,9 +316,6 @@ export const searchContactReset = () => ({
 
 
 //============================== end search contact
-
-
-
 
 
 

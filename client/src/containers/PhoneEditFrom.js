@@ -60,7 +60,7 @@ class PhoneEditFrom extends React.Component {
                 <td>
                     <form className="form-row" onSubmit={this.handleSubmit}>
                         <div className="col-8">
-                            <input type="text" className="form-control" name="Name" value={this.state.Phone} onChange={this.handlePhoneChange} required={true} />
+                            <input type="number" className="form-control" name="Name" value={this.state.Phone} onChange={this.handlePhoneChange} required={true} />
                         </div>
                     </form>
                 </td>

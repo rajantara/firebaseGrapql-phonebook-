@@ -16,7 +16,9 @@ const phones = (state = [], action) => {
                     Id: action.Id,
                     Name: action.Name,
                     Phone: action.Phone,
-                    sent: true
+                    sent: true,
+                    search: true,
+                    onEdit: false
                 }
             ]
 
